@@ -20,7 +20,7 @@ var movies = [
 ]
 
 var chosenMovie;
-var letterArray
+var letterArray = [];
 var correctGuesses = [];
 var wrongGuesses = [];
 var remainingGuesses;
@@ -29,11 +29,7 @@ var remainingGuesses;
 var wins = 0;
 var losses = 0;
 
-// Create variables to hold references in the HTML to display information.
-var directionsText = document.getElementById("directions-text");
-var userGuessText = document.getElementById("userguess-text");
-var guessesText = document.getElementById("guesses-text");
-var winsText = document.getElementById("wins-text");
+
 
 // Choose a random word from the movies list.
 var chosenMovie = movies[Math.floor(Math.random() * movies.length)];
@@ -41,6 +37,12 @@ var chosenMovie = movies[Math.floor(Math.random() * movies.length)];
 console.log(chosenMovie);
 
 document.onkeyup = function (event) {
+
+    // Create variables to hold references in the HTML to display information.
+    var directionsText = document.getElementById("directions-text");
+    var userGuessText = document.getElementById("userguess-text");
+    var guessesText = document.getElementById("guesses-text");
+    var winsText = document.getElementById("wins-text");
 
     var userGuess = event.key.toLowerCase();
 
@@ -52,18 +54,18 @@ document.onkeyup = function (event) {
             correctGuesses.push(userGuess);
             userGuessText.innerHTML = correctGuesses;
         }
-        
+
         else {
             wrongGuesses.push(userGuess);
             guessesText.innerHTML = wrongGuesses;
         }
     }
 
-    
+
 
 }
 
-var remainingGuesses = chosenMovie.length;
+// var remainingGuesses = chosenMovie.length;
 
 
 
