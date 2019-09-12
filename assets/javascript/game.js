@@ -6,14 +6,14 @@
 // After the user wins/loses the game should automatically choose another word and make the user play it.
 
 // Create variables to hold the movie chosen and letters of the movie.
-var validLetters = "abcdefghijklmnopqrstuvwxyz ";
+var validLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
 var movies = [
-    "aabc",
-    // "Interstellar",
-    // "Alien",
-    // "Contact",
-    // "Star Wars",
-    // "Star Trek",
+    "INTERSTELLAR",
+    "ALIENS",
+    "CONTACT",
+    "GRAVITY",
+    "STAR WARS",
+    "STAR TREK",
 ]
 
 var chosenMovie;
@@ -48,12 +48,12 @@ document.onkeyup = function (event) {
     var winsText = document.getElementById("wins-text");
     var lossText = document.getElementById("losses-text");
 
-    var userGuess = event.key.toLowerCase();
+    var userGuess = event.key.toUpperCase();
     console.log("User guess: " + userGuess);
     userGuessText.innerHTML = correctGuesses.join(" ");
     winsText.innerHTML = wins;
     lossText.innerHTML = losses;
-    
+
 
     for (var i = 0; i < validLetters.length; i++) {
         if (userGuess === validLetters.charAt(i)) {
@@ -62,6 +62,13 @@ document.onkeyup = function (event) {
     }
 
     console.log("Valid: " + isValid);
+
+    for (var i = 0; i < correctGuesses.length; i++) {
+        if (userGuess === correctGuesses[i]) {
+            alreadyGuessed = true;
+            console.log("Correct dupe: " + alreadyGuessed);
+        }
+    }
 
     for (var j = 0; j < chosenMovie.length; j++) {
         if (userGuess === chosenMovie.charAt(j)) {
@@ -74,9 +81,12 @@ document.onkeyup = function (event) {
 
     console.log("Correct match: " + correctMatch);
 
-    // for (var k = 0; k < chosenMovie.length; k++) {
-    //     if (userGuess == chosenMovie.charAt[i] && )
-    // }
+    for (var i = 0; i < wrongGuesses.length; i++) {
+        if (userGuess === wrongGuesses[i]) {
+            alreadyGuessed = true;
+            console.log("Wrong dupe: " + alreadyGuessed);
+        }
+    }
 
     if (isValid === true && correctMatch === false) {
         wrongGuesses.push(userGuess);
@@ -84,15 +94,24 @@ document.onkeyup = function (event) {
         console.log(wrongGuesses);
     }
 
+    if (alreadyGuessed === true && isValid === true && correctMatch === false) {
+        wrongGuesses.pop();
+        wrongGuessText.innerHTML = wrongGuesses.join(" ");
+        console.log(wrongGuesses);
+    }
+
+    // Updates for wins and losses
     if (correctGuesses.join("") === chosenMovie) {
         wins++;
         winsText.innerHTML = wins;
     }
+
+    if (wrongGuesses.length > 2) {
+        losses++;
+        lossText.innerHTML = losses;
+        alert("Game over man!");
+    }
 }
-
-
-// var remainingGuesses = chosenMovie.length;
-
 
 
 
