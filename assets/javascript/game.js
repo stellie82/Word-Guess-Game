@@ -100,6 +100,7 @@ function startGame() {
             wins++;
             winsText.innerHTML = wins;
             alert("You win!");
+            reset();
         }
 
         if (wrongGuesses.length > 7) {
@@ -112,14 +113,18 @@ function startGame() {
             alert("You have already guessed that letter");
         }
 
-        if (remainingGuesses === 0 || chosenMovie === correctGuesses.join("")) {
+        if (remainingGuesses === 0) {
+            losses++;
+            lossText.innerHTML = losses;
+            alert("Sorry you didn't guess the movie, maybe next time...");
             reset();
         }
     }
+}
 
-    function reset() {
-        startGame();
-    }
+function reset() {
+    startGame();
+    alert("Click any button to guess a new movie");
 }
 
 startGame();
