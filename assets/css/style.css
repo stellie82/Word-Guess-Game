@@ -1,0 +1,31 @@
+header {
+    margin: 0;
+    background-color: #ffffff;
+}
+
+body {
+    margin: 0;
+    background-image: url(../images/spacebackground.jpg);
+}
+
+h1 {
+    margin: auto;
+    padding: 30px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    color: #000000;;
+}
+
+.textbox {
+    margin: auto;
+    padding: 30px;
+}
+
+p {
+    margin: auto;
+    padding: 30px;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    color: #ffffff;
+}
