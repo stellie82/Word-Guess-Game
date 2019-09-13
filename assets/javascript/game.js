@@ -13,6 +13,7 @@ var chosenMovie;
 // Create variables to hold the number of wins, guesses, and losses.  Guesses to start at 9 and count down.
 var wins = 0;
 var losses = 0;
+alert("Press any key to begin");
 
 function startGame() {
 
@@ -21,7 +22,7 @@ function startGame() {
     var remainingGuesses = 7;
 
     // Choose a random word from the movies list.
-    var chosenMovie = movies[Math.floor(Math.random() * movies.length)];
+    chosenMovie = movies[Math.floor(Math.random() * movies.length)];
     console.log(chosenMovie);
 
     for (a = 0; a < chosenMovie.length; a++) {
@@ -116,17 +117,43 @@ function startGame() {
     }
 }
 
+// Create a function to reset the game.
 function reset() {
     if (chosenMovie === "CONTACT") {
         contact();
     }
-    // else if (chosenMovie === "")
+    
+    else if (chosenMovie === "GRAVITY") {
+        gravity();
+    }
+
+    else if (chosenMovie === "INTERSTELLAR") {
+        interstellar();
+    }
+
+    else if (chosenMovie === "ALIENS") {
+        aliens();
+    }
+
     startGame();
     alert("Click any button to guess a new movie");
 }
 
+// Create functions for changing backgrounds to random picked movies.
 function contact() {
-    document.getElementById("movie").style.backgroundImage = "url('../images/contact.jpg')";
+    document.body.style.backgroundImage = "url('assets/images/contact.jpg')";
+}
+
+function gravity() {
+    document.body.style.backgroundImage = "url('assets/images/gravity.jpg')";
+}
+
+function interstellar() {
+    document.body.style.backgroundImage = "url('assets/images/interstellar.jpg')";
+}
+
+function aliens() {
+    document.body.style.backgroundImage = "url('assets/images/aliens.jpg')";
 }
 
 startGame();
