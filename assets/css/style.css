@@ -16,9 +16,12 @@ h1 {
     color: #000000;;
 }
 
-.textbox {
+h3 {
     margin: auto;
     padding: 30px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    color: #ffffff;
 }
 
 p {
@@ -28,4 +31,10 @@ p {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 16px;
     color: #ffffff;
+}
+
+#movie {
+    margin: 0;
+    padding: 0;
+    width: 100%
 }

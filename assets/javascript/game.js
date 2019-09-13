@@ -36,7 +36,7 @@ function startGame() {
         var alreadyGuessed = false;
 
         // Create variables to hold references in the HTML to display information.
-        var directionsText = document.getElementById("directions-text");
+        var messageText = document.getElementById("message-text");
         var userGuessText = document.getElementById("userguess-text");
         var wrongGuessText = document.getElementById("wrong-text");
         var guessesText = document.getElementById("guesses-text");
@@ -45,7 +45,7 @@ function startGame() {
 
         // Initiate settings for when user first presses a key.
         var userGuess = event.key.toUpperCase();
-        console.log("User guess: " + userGuess);
+        messageText.innerHTML = "";
         userGuessText.innerHTML = correctGuesses.join(" ");
         winsText.innerHTML = wins;
         lossText.innerHTML = losses;
@@ -99,32 +99,34 @@ function startGame() {
         if (correctGuesses.join("") === chosenMovie) {
             wins++;
             winsText.innerHTML = wins;
-            alert("You win!");
+            messageText.innerHTML = "You win!";
             reset();
         }
 
-        if (wrongGuesses.length > 7) {
+        if (wrongGuesses.length > 7 || remainingGuesses === 0) {
             losses++;
             lossText.innerHTML = losses;
-            alert("Sorry you didn't guess the movie, maybe next time...");
+            messageText.innerHTML = "Sorry you didn't guess the movie, maybe next time...";
+            reset();
         }
 
         if (alreadyGuessed === true) {
             alert("You have already guessed that letter");
         }
-
-        if (remainingGuesses === 0) {
-            losses++;
-            lossText.innerHTML = losses;
-            alert("Sorry you didn't guess the movie, maybe next time...");
-            reset();
-        }
     }
 }
 
 function reset() {
+    if (chosenMovie === "CONTACT") {
+        contact();
+    }
+    // else if (chosenMovie === "")
     startGame();
     alert("Click any button to guess a new movie");
+}
+
+function contact() {
+    document.getElementById("movie").style.backgroundImage = "url('../images/contact.jpg')";
 }
 
 startGame();
