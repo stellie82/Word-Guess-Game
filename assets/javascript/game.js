@@ -23,7 +23,6 @@ function startGame() {
 
     // Choose a random word from the movies list.
     chosenMovie = movies[Math.floor(Math.random() * movies.length)];
-    console.log(chosenMovie);
 
     for (a = 0; a < chosenMovie.length; a++) {
         correctGuesses.push("__");
@@ -59,13 +58,10 @@ function startGame() {
             }
         }
 
-        console.log("Valid: " + isValid);
-
         // Check to see if the letter pressed has been already guessed.
         for (var i = 0; i < correctGuesses.length; i++) {
             if (userGuess === correctGuesses[i]) {
                 alreadyGuessed = true;
-                console.log("Correct dupe: " + alreadyGuessed);
             }
         }
         // See if the pressed key matches a letter in the chosen word and add to the correct guesses array.
@@ -74,17 +70,13 @@ function startGame() {
                 correctMatch = true;
                 correctGuesses[j] = userGuess;
                 userGuessText.innerHTML = correctGuesses.join(" ");
-                console.log(correctGuesses);
             }
         }
-
-        console.log("Correct match: " + correctMatch);
 
         // Check to see if the letter pressed has been already guessed.
         for (var i = 0; i < wrongGuesses.length; i++) {
             if (userGuess === wrongGuesses[i]) {
                 alreadyGuessed = true;
-                console.log("Wrong dupe: " + alreadyGuessed);
             }
         }
 
@@ -93,7 +85,6 @@ function startGame() {
             remainingGuesses--;
             wrongGuesses.push(userGuess);
             wrongGuessText.innerHTML = wrongGuesses.join(" ");
-            console.log(wrongGuesses);
         }
 
         // Updates for wins and losses
@@ -109,10 +100,6 @@ function startGame() {
             lossText.innerHTML = losses;
             messageText.innerHTML = "Sorry you didn't guess the movie, maybe next time...";
             reset();
-        }
-
-        if (alreadyGuessed === true) {
-            alert("You have already guessed that letter");
         }
     }
 }
