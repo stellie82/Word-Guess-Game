@@ -10,17 +10,16 @@ var movies = [
 // Create a variable to hold the randomly chosen movie for the user to guess.
 var chosenMovie;
 
-// Create variables to hold the number of wins, guesses, and losses.  Guesses to start at 9 and count down.
+// Create variables to hold the number of wins, guesses, and losses.
 var wins = 0;
 var losses = 0;
-alert("Press any key to begin");
 
 function startGame() {
 
     var correctGuesses = [];
     var wrongGuesses = [];
     var remainingGuesses = 7;
-
+    
     // Choose a random word from the movies list.
     chosenMovie = movies[Math.floor(Math.random() * movies.length)];
 
@@ -64,6 +63,13 @@ function startGame() {
                 alreadyGuessed = true;
             }
         }
+
+        for (var i = 0; i < wrongGuesses.length; i++) {
+            if (userGuess === wrongGuesses[i]) {
+                alreadyGuessed = true;
+            }
+        }
+
         // See if the pressed key matches a letter in the chosen word and add to the correct guesses array.
         for (var j = 0; j < chosenMovie.length; j++) {
             if (userGuess === chosenMovie.charAt(j)) {
@@ -73,14 +79,7 @@ function startGame() {
             }
         }
 
-        // Check to see if the letter pressed has been already guessed.
-        for (var i = 0; i < wrongGuesses.length; i++) {
-            if (userGuess === wrongGuesses[i]) {
-                alreadyGuessed = true;
-            }
-        }
-
-        // If the letter is not either valid or correct, add to the wrong guesses list.
+        // If the letter is valid but not correct, add to the wrong guesses list.
         if (isValid === true && correctMatch === false && alreadyGuessed === false) {
             remainingGuesses--;
             wrongGuesses.push(userGuess);
@@ -91,11 +90,11 @@ function startGame() {
         if (correctGuesses.join("") === chosenMovie) {
             wins++;
             winsText.innerHTML = wins;
-            messageText.innerHTML = "You win!";
+            messageText.innerHTML = "You win!  Press any key to start a new game.";
             reset();
         }
 
-        if (wrongGuesses.length > 7 || remainingGuesses === 0) {
+        else if (remainingGuesses === 0) {
             losses++;
             lossText.innerHTML = losses;
             messageText.innerHTML = "Sorry you didn't guess the movie, maybe next time...";
@@ -121,9 +120,8 @@ function reset() {
     else if (chosenMovie === "ALIENS") {
         aliens();
     }
-
+    wrongGuessText.innerHTML = "";
     startGame();
-    alert("Click any button to guess a new movie");
 }
 
 // Create functions for changing backgrounds to random picked movies.
