@@ -14,11 +14,17 @@ var chosenMovie;
 var wins = 0;
 var losses = 0;
 
+var wrongGuessText;
+
 function startGame() {
 
     var correctGuesses = [];
     var wrongGuesses = [];
     var remainingGuesses = 7;
+
+    if (wrongGuessText) {
+        wrongGuessText.innerHTML = "";
+    }
     
     // Choose a random word from the movies list.
     chosenMovie = movies[Math.floor(Math.random() * movies.length)];
@@ -37,7 +43,7 @@ function startGame() {
         // Create variables to hold references in the HTML to display information.
         var messageText = document.getElementById("message-text");
         var userGuessText = document.getElementById("userguess-text");
-        var wrongGuessText = document.getElementById("wrong-text");
+        wrongGuessText = document.getElementById("wrong-text");
         var guessesText = document.getElementById("guesses-text");
         var winsText = document.getElementById("wins-text");
         var lossText = document.getElementById("losses-text");
@@ -64,18 +70,18 @@ function startGame() {
             }
         }
 
-        for (var i = 0; i < wrongGuesses.length; i++) {
-            if (userGuess === wrongGuesses[i]) {
-                alreadyGuessed = true;
-            }
-        }
-
         // See if the pressed key matches a letter in the chosen word and add to the correct guesses array.
         for (var j = 0; j < chosenMovie.length; j++) {
             if (userGuess === chosenMovie.charAt(j)) {
                 correctMatch = true;
                 correctGuesses[j] = userGuess;
                 userGuessText.innerHTML = correctGuesses.join(" ");
+            }
+        }
+
+        for (var i = 0; i < wrongGuesses.length; i++) {
+            if (userGuess === wrongGuesses[i]) {
+                alreadyGuessed = true;
             }
         }
 
@@ -120,7 +126,7 @@ function reset() {
     else if (chosenMovie === "ALIENS") {
         aliens();
     }
-    wrongGuessText.innerHTML = "";
+
     startGame();
 }
 
@@ -142,3 +148,7 @@ function aliens() {
 }
 
 startGame();
+
+
+// wrong guesses need to clear
+// remaining guesses one click off
