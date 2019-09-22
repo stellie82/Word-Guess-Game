@@ -14,6 +14,7 @@ var chosenMovie;
 var wins = 0;
 var losses = 0;
 
+var userGuessText;
 var wrongGuessText;
 
 function startGame() {
@@ -22,6 +23,11 @@ function startGame() {
     var wrongGuesses = [];
     var remainingGuesses = 7;
 
+    // Clear contents before the start of a new game.
+    if (userGuessText) {
+        userGuessText.innerHTML = "";
+    }
+    
     if (wrongGuessText) {
         wrongGuessText.innerHTML = "";
     }
@@ -42,7 +48,7 @@ function startGame() {
 
         // Create variables to hold references in the HTML to display information.
         var messageText = document.getElementById("message-text");
-        var userGuessText = document.getElementById("userguess-text");
+        userGuessText = document.getElementById("userguess-text");
         wrongGuessText = document.getElementById("wrong-text");
         var guessesText = document.getElementById("guesses-text");
         var winsText = document.getElementById("wins-text");
@@ -54,7 +60,6 @@ function startGame() {
         userGuessText.innerHTML = correctGuesses.join(" ");
         winsText.innerHTML = wins;
         lossText.innerHTML = losses;
-        guessesText.innerHTML = remainingGuesses;
 
         // First check to make sure that the key pressed is a valid letter.
         for (var i = 0; i < validLetters.length; i++) {
@@ -96,16 +101,17 @@ function startGame() {
         if (correctGuesses.join("") === chosenMovie) {
             wins++;
             winsText.innerHTML = wins;
-            messageText.innerHTML = "You win!  Press any key to start a new game.";
+            messageText.innerHTML = "You win!  Press enter to play again.";
             reset();
         }
 
         else if (remainingGuesses === 0) {
             losses++;
             lossText.innerHTML = losses;
-            messageText.innerHTML = "Sorry you didn't guess the movie, maybe next time...";
+            messageText.innerHTML = "Sorry you didn't guess the movie, maybe next time... Press enter to play again.";
             reset();
         }
+        guessesText.innerHTML = remainingGuesses;
     }
 }
 
@@ -148,7 +154,3 @@ function aliens() {
 }
 
 startGame();
-
-
-// wrong guesses need to clear
-// remaining guesses one click off
